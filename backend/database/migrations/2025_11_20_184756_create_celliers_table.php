@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('produits', function (Blueprint $table) {
-            $table->string('millesime_produit')->nullable();
-            $table->string('pays_origine')->nullable();
+        Schema::create('celliers', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // lien avec users
+            $table->string('nom'); // nom du cellier
+            $table->text('description')->nullable(); // description optionnelle
+            $table->timestamps();
         });
     }
 
@@ -26,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('produits', function (Blueprint $table) {
-            $table->dropColumn(['millesime_produit', 'pays_origine']);
-        });
+        Schema::dropIfExists('celliers');
     }
 };

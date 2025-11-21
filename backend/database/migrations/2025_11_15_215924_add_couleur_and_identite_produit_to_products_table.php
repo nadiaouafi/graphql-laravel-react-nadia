@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('produits', function (Blueprint $table) {
             $table->string('couleur')->nullable()->after('category');
             $table->string('identite_produit')->nullable()->after('couleur');
         });
@@ -26,7 +26,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('produits', function (Blueprint $table) {
             $table->dropColumn(['couleur', 'identite_produit']);
         });
     }
