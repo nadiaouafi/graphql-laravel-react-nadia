@@ -99,7 +99,7 @@ export default function Incription() {
             onChange={(e) => setConfirmationMdp(e.target.value)}
           />
         </div>
-        <input className="btn-accent" type="submit" value="S'inscrire" />
+        <input className="bouton-accent" type="submit" value="S'inscrire" />
        <Link className="underline mt-4" to="/connexion">Déjà inscrit? Se connecter</Link>
       </form>
    </section>
