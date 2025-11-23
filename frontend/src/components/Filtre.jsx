@@ -25,7 +25,6 @@ export default function Filtre({ setFilter, filter }) {
 
 	return (
 		<form class="formulaire_de_filtre" style={{ marginBottom: "1rem" }}>
-			<h2 style={{ cursor: "default" }}>Filtre</h2>
 
 			<div ref={dropdownRef} className="custom-select" onClick={() => setOpen(!open)}>
 				<div className="selected">{filter || "Filtrez par couleur"}</div>
