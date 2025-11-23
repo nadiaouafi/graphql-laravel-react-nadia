@@ -24,7 +24,7 @@ export default function Filtre({ setFilter, filter }) {
 	}, []);
 
 	return (
-		<form style={{ marginBottom: "1rem" }}>
+		<form class="formulaire_de_filtre" style={{ marginBottom: "1rem" }}>
 			<h2 style={{ cursor: "default" }}>Filtre</h2>
 
 			<div ref={dropdownRef} className="custom-select" onClick={() => setOpen(!open)}>
