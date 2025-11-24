@@ -6,7 +6,6 @@ import {
   X,
   ChevronDown,
   ChevronUp,
-  Languages,
 } from "lucide-react";
 
 export default function Header() {
@@ -50,13 +49,18 @@ export default function Header() {
               Mon compte 
             </button>
 
-            <div className="absolute hidden group-hover:flex flex-col bg-white border border-orange-50 shadow rounded mt-2 w-48 p-3 z-40">
+            <div className="absolute hidden group-hover:flex flex-col bg-white border border-orange-50 shadow rounded mt-2 w-50 p-3 z-40">
               <Link to="/compte" className="hover:text-red-950">
                 Gérer mon compte
               </Link>
               <Link to="/celliers" className="hover:text-red-950">
                 Mon cellier
               </Link>
+              <Link to="/cellier/creer" className="hover:text-red-950">
+                Ajouter un cellier
+              </Link>
+
+              
             </div>
           </div>
 
@@ -72,7 +76,7 @@ export default function Header() {
             Connexion
           </Link>
 
-          <Languages className="w-6 h-6 text-red-950 cursor-pointer" />
+         
         </nav>
 
 
@@ -81,7 +85,7 @@ export default function Header() {
         {/* Icônes Mobile */}
         <div className="md:hidden flex items-center gap-4">
           
-          <Languages className="w-6 h-6 text-red-950" />
+          
           <button onClick={() => setMenuOuvert(true)}>
             <Menu className="w-7 h-7 text-red-950" />
           </button>
@@ -149,15 +153,6 @@ export default function Header() {
             Inscription
           </Link>
 
-          {/* Bouton connexion mobile */}
-          <Link
-            to="/connexion"
-            className="mt-6 bg-red-950 text-white text-center py-3 rounded-lg hover:text-red-950 hover:bg-red-100 text-red-950 transition"
-          >
-            Connexion
-          </Link>
-        </nav>
-      </aside>
     </>
   );
 }

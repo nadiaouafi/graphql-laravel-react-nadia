@@ -20,7 +20,10 @@ class CellierController extends Controller
         return response()->json($celliers);
     }    
 
-    public function afficherProduit($cellierId) {
+
+
+    public function afficherProduit($cellierId)
+    {
         $cellier = Cellier::with('produits')->findOrFail($cellierId);
         return response()->json($cellier);
     } 
@@ -54,7 +57,8 @@ class CellierController extends Controller
         return response()->json(['message' => 'Quantité mise à jour']);
     }
 
-    public function supprimerProduit(Request $request, $cellierId, $produitId) {
+    public function supprimerProduit(Request $request, $cellierId, $produitId)
+    {
         $cellier = Cellier::findOrFail($cellierId);
         $item = $cellier->produits()->where('produit_id', $produitId)->first();
 

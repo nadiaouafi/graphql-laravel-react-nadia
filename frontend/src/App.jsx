@@ -5,6 +5,7 @@ import CellierUtilisateur from "./components/cellierUtilisateur";
 import Layout from "./components/Layout";
 import Auth from "./pages/Auth";
 import Inscription from "./pages/Inscription";
+import CreerCellier from "./pages/CreerCellier";
 import "./App.css";
 
 export default function App() {
