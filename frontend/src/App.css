@@ -1,3 +1,4 @@
+@import "tailwindcss";
 @import './assets/css/principal/principal';
 @import './assets/css/grille/grille';
 @import './assets/css/carte/carte';
@@ -6,3 +7,12 @@
 @import './assets/css/fiche/fiche';
 @import './assets/css/bouton/bouton';
 @import './assets/css/ajout/ajout';
+@import './assets/css/text/text';
+@import './assets/css/bg/bg';
+@import './assets/css/animation/animation';
+
+
+
+
+
+

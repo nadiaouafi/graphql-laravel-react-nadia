@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\produitController;
 use App\Http\Controllers\CellierController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -20,6 +21,11 @@ use App\Http\Controllers\CellierController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Routes des usagers
+Route::post('/inscription', [UserController::class, 'store']);
+
+// Routes des produits (vins)
 
 Route::get('/produits', [produitController::class, 'index']);
 Route::get('/produits/{id}', [produitController::class, 'show']);
