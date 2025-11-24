@@ -28,6 +28,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Routes des usagers
 Route::post('/inscription', [UserController::class, 'store']);
 
+// Routes des produits (vins)
+
 Route::get('/produits', [produitController::class, 'index']);
 Route::get('/produits/{id}', [produitController::class, 'show']);
 
