@@ -36,19 +36,7 @@ export default function FicheProduit({  }) {
             .catch(err => console.error("Erreur celliers:", err));
     }, []);
 
-    /*useEffect(() => {
-        const idUtilisateur = 1; // temporaire pour tester
-        axios.get(`http://localhost:8000/api/users/${idUtilisateur}/celliers`)
-            .then(res => {
-                const listeCelliers = Array.isArray(res.data) ? res.data : [];
-                setCelliers(listeCelliers);
-                if (listeCelliers.length > 0) {
-                    setCellierSelectionne(listeCelliers[0].id);
-                }
-            })
-            .catch(err => console.error(err));
-    }, []);*/
-
+   
     /**
      * Fonction qui ajoute un vin dans un cellier à partir d'un formulaire d'ajoute. Possibilité d'incrémenter ou décrémenter la quantité avant de soumettre.
      * @returns retourne le vin ajouté au cellier

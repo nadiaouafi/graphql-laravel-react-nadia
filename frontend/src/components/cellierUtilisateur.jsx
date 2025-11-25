@@ -67,7 +67,7 @@ export default function AfficheCellier() {
                           cellierOuvertId === cellier.id ? null : cellier.id
                         )
                       }
-                      className="w-full text-left p-3 bouton-rosee flex justify-between rounded-lg hover-text-white cursor-pointer"
+                      className="w-full text-left p-3 bouton-vin-rosee flex justify-between rounded-lg hover-text-white cursor-pointer"
                     >
                       <span>{cellier.nom}</span>
                       <span>{cellierOuvertId === cellier.id ? "-" : "+"}</span>

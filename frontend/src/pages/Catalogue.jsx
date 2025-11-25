@@ -14,7 +14,7 @@ const [produits, setproduits] = useState([]);
 const [pageCourante, setPageCourante] = useState(1);
 const [totalPages, setTotalPages] = useState(1);
 const [filtre, setFiltre] = useState("");
-const [ordre, setOrdre] = useState("");
+const [ordre, setOrdre] = useState("asc");
 
 // Obtenir les infos de l'usager 
 const user = JSON.parse(localStorage.getItem("user"));
@@ -49,10 +49,10 @@ const bouteillesParPage = 12;
 
   return (
 	  <div className="contenu">
-        <p className="flex justify-end mb-15 text-sm">Bienvenue, {user.name} !</p>
+        {/* <p className="flex justify-end mb-15 text-sm">Bienvenue, {user.name} !</p> */}
 		<h1 className="mt-10 mb-6 text-4xl text-bold text-center">Catalogue</h1>
 
-		<Filtre filtre={filtre} setFiltre={setFiltre} ordre={ordre} setOrdre={setOrdre} setproduits={setproduits}/>
+	 <Filtre filtre={filtre} setFiltre={setFiltre} ordre={ordre} setOrdre={setOrdre} setproduits={setproduits}/>
 
 		
 		<div className="grilleBouteille">
@@ -87,7 +87,7 @@ const bouteillesParPage = 12;
 					disabled={pageCourante === 1}
 					className="px-4 py-2 bouton bouton-vin text-white mt-50 mb-50 rounded text-lg disabled:text:gray"
 				>
-					◀
+					<span className="boutonRosee">◀</span>
 				</button>					
 				<button className="px-4 py-2 rounded bouton bouton-vin text-white">
 					{pageCourante}
@@ -100,7 +100,7 @@ const bouteillesParPage = 12;
 					disabled={pageCourante === totalPages}
 					className="px-4 py-2 rounded bouton bouton-vin text-white text-lg mt-50 mb-50 disabled:text-gray"
 				>
-					▶
+					<span className="boutonRosee text-md">▶</span>
 				</button>
 			</div>
 		)}
