@@ -36,7 +36,7 @@ export default function FicheProduit({  }) {
             .catch(err => console.error("Erreur celliers:", err));
     }, []);
 
-
+   
     /**
      * Fonction qui ajoute un vin dans un cellier à partir d'un formulaire d'ajoute. Possibilité d'incrémenter ou décrémenter la quantité avant de soumettre.
      * @returns retourne le vin ajouté au cellier
