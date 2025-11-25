@@ -31,17 +31,18 @@ export default function Filtre({ filtre, setFiltre, ordre, setOrdre, setproduits
 	useEffect(() => {
 		if (!ordre) return;
 
-		const key = ordreMap[ordre]; // Permet de sécuritairement changer le texte sans détruire les variables
+		const key = ordreMap[ordre];
 
 		setproduits(prev => {
 			const sorted = [...prev];
-			if (key === "anneeJeuneVieux") sorted.sort((a,b) => a.annee - b.annee);
-			else if (key === "anneeVieuxJeune") sorted.sort((a,b) => b.annee - a.annee);
-			else if (key === "prixBasHaut") sorted.sort((a,b) => a.price - b.price);
-			else if (key === "prixHautBas") sorted.sort((a,b) => b.price - a.price);
+			if (key === "anneeJeuneVieux") sorted.sort((a,b) => a.millesime_produit - b.millesime_produit);
+			else if (key === "anneeVieuxJeune") sorted.sort((a,b) => b.millesime_produit - a.millesime_produit);
+			else if (key === "prixBasHaut") sorted.sort((a,b) => a.prix - b.prix);
+			else if (key === "prixHautBas") sorted.sort((a,b) => b.prix - a.prix);
 			return sorted;
 		});
-	}, [ordre]);
+	}, [ordre, setproduits]);
+
 
 	// Detection de click hors du dropdown
 	useEffect(() => {
@@ -69,11 +70,26 @@ export default function Filtre({ filtre, setFiltre, ordre, setOrdre, setproduits
 					<ul className="options">
 						{couleurs.map(c => (
 							<li
-								key={c}
-								className="option"
-								onClick={() => { setFiltre(c); setOuvert(false); }}
+							key={c}
+							className="option"
+							onClick={() => {
+								setFiltre(c);
+								setOuvert(false);
+								if (ordre) {
+									const key = ordreMap[ordre];
+									console.log(key);
+									setproduits(prev => {
+										const sorted = [...prev];
+										if (key === "anneeJeuneVieux") sorted.sort((a,b) => a.millesime_produit - b.millesime_produit);
+										else if (key === "anneeVieuxJeune") sorted.sort((a,b) => b.millesime_produit - a.millesime_produit);
+										else if (key === "prixBasHaut") sorted.sort((a,b) => a.price - b.price);
+										else if (key === "prixHautBas") sorted.sort((a,b) => b.price - a.price);
+										return sorted;
+									});
+								}
+							}}
 							>
-								{c}
+							{c}
 							</li>
 						))} 
 					</ul>
