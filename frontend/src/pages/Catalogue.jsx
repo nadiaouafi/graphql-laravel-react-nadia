@@ -14,7 +14,7 @@ const [produits, setproduits] = useState([]);
 const [pageCourante, setPageCourante] = useState(1);
 const [totalPages, setTotalPages] = useState(1);
 const [filtre, setFiltre] = useState("");
-const [ordre, setOrdre] = useState("asc");
+const [ordre, setOrdre] = useState("Ordonnez par...");
 
 const bouteillesParPage = 12;
 
