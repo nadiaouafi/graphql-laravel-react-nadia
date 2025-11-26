@@ -33,22 +33,23 @@ class CellierController extends Controller
     // Ajouter une nouvelle méthode pour créer un cellier via l'API
     public function storeAPI(Request $request)
     {
-
         $validated = $request->validate([
             'nom' => 'required|string|max:100',
-            'id_usager' => 'required|integer',
-        ], [
-            'nom.required' => 'Le nom du cellier est obligatoire.',
-            'nom.max' => 'Le nom ne peut pas dépasser 100 caractères.',
         ]);
 
-        $cellier = Cellier::create($validated);
+        $cellier = Cellier::create([
+            'nom' => $validated['nom'],
+            'user_id' => $request->user()->id
+        ]);
 
         return response()->json([
             'message' => 'Cellier créé avec succès.',
             'cellier' => $cellier
         ], 201);
     }
+
+
+
 
 
 

@@ -9,23 +9,23 @@ class Cellier extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'nom', 'description'];
+    protected $fillable = ['id_usager', 'nom', 'description'];
 
     // Relation avec l'utilisateur
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'id_usager', 'id');
     }
 
     // Relation avec les produits via la table pivot
     public function produits()
     {
         return $this->belongsToMany(
-            Produit::class,       
-            'cellier_produit',    
-            'cellier_id',     
+            Produit::class,
+            'cellier_produit',
+            'cellier_id',
             'produit_id'
         )->withPivot('quantite')
-         ->withTimestamps();
+            ->withTimestamps();
     }
 }

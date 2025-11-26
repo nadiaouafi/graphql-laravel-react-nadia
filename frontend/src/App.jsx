@@ -6,6 +6,10 @@ import Layout from "./components/Layout";
 import Auth from "./pages/Auth";
 import Inscription from "./pages/Inscription";
 import CreerCellier from "./pages/CreerCellier";
+
+
+
+
 import "./App.css";
 
 export default function App() {
@@ -18,10 +22,9 @@ export default function App() {
         <Route path="/" element={<Catalogue />} />         
         <Route path="/produit/:id" element={<FicheProduit />} />      
         <Route path="/user/:id/celliers" element={<CellierUtilisateur />} />
-        <Route path="/cellier/creer" element={<CreerCellier />} /> 
-       
-       
-     
+        <Route path="/cellier/creer" element={<CreerCellier />} />
+        
+
       </Routes>
       </div>
     </Layout>

@@ -43,26 +43,30 @@ export default function Header() {
             Catalogue
           </Link>
 
-          {/* Sous-menu Mon compte */}
-          <div className="relative group">
-            <button className="flex items-center gap-2 hover:text-red-950">
-              Mon compte 
-            </button>
+         {/* Sous-menu Mon compte (desktop clic) */}
+<div className="relative">
+  <button
+    className="flex items-center gap-2 hover:text-red-950"
+    onClick={() => setCompteOuvert(!compteOuvert)}
+  >
+    Mon compte
+  </button>
 
-            <div className="absolute hidden group-hover:flex flex-col bg-white border border-orange-50 shadow rounded mt-2 w-50 p-3 z-40">
-              <Link to="/compte" className="hover:text-red-950">
-                Gérer mon compte
-              </Link>
-              <Link to="/cellier" className="hover:text-red-950">
-                Mon cellier
-              </Link>
-              <Link to="/cellier/creer" className="hover:text-red-950">
-                Ajouter un cellier
-              </Link>
+  {compteOuvert && (
+    <div className="absolute flex flex-col bg-white border border-orange-50 shadow rounded mt-2 w-48 p-3 z-40">
+      <Link to="/compte" className="hover:text-red-950" onClick={() => setCompteOuvert(false)}>
+        Gérer mon compte
+      </Link>
+      <Link to="/cellier" className="hover:text-red-950" onClick={() => setCompteOuvert(false)}>
+        Mes celliers
+      </Link>
+      <Link to="/cellier/creer" className="hover:text-red-950" onClick={() => setCompteOuvert(false)}>
+        Ajouter un cellier
+      </Link>
+    </div>
+  )}
+</div>
 
-              
-            </div>
-          </div>
 
           <Link to="/inscription" className="hover:text-red-950">
             Inscription
