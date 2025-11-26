@@ -24,8 +24,6 @@ const bouteillesParPage = 12;
 	useEffect(() => {
 		getproduits(pageCourante, bouteillesParPage, filtre)
 			.then((res) => {
-				console.log("res.data type:", typeof res.data);
-				console.log("res.data actual value:", res.data);
 
 				if (filtre) {
 					setproduits(Array.isArray(res.data) ? res.data : res.data.data || []);
@@ -37,6 +35,8 @@ const bouteillesParPage = 12;
 			})
 			.catch((err) => console.error("Erreur API :", err));
 	}, [pageCourante, filtre]);
+
+
 
 	const prochainePage = () => {
 		if (pageCourante < totalPages) setPageCourante(pageCourante + 1);
@@ -62,7 +62,7 @@ const bouteillesParPage = 12;
 						<img className="imageBouteille" src={p.image} alt="Nom de l'image {p.name} "/>
 						<div className="carteContenu">
 						<h3 className="font-bold">{p.name}</h3>
-						<p>{p.identite_produit}</p>
+						<p>{p.identite_produit} - {p.millesime_produit}</p>
 						<p>{Number(p.price).toFixed(2)} $</p>	
 						<div className="flex justify-between align-center">
 							<>
