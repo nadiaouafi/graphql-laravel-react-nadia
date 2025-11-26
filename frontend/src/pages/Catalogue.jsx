@@ -104,3 +104,5 @@ const bouteillesParPage = 12;
 	</div>
   );
 }
+
+export default Catalogue
