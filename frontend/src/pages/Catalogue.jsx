@@ -24,8 +24,6 @@ const bouteillesParPage = 12;
 	useEffect(() => {
 		getproduits(pageCourante, bouteillesParPage, filtre)
 			.then((res) => {
-				console.log("res.data type:", typeof res.data);
-				console.log("res.data actual value:", res.data);
 
 				if (filtre) {
 					setproduits(Array.isArray(res.data) ? res.data : res.data.data || []);
@@ -37,6 +35,8 @@ const bouteillesParPage = 12;
 			})
 			.catch((err) => console.error("Erreur API :", err));
 	}, [pageCourante, filtre]);
+
+
 
 	const prochainePage = () => {
 		if (pageCourante < totalPages) setPageCourante(pageCourante + 1);
