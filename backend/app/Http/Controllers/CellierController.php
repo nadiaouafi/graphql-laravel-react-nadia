@@ -8,27 +8,60 @@ use App\Models\Cellier;
 
 class CellierController extends Controller
 {
-   
-    public function produits($cellierId) {
-        $celliers = Cellier::with('produits')->findOrFail($cellierId);
-        return response()->json($celliers->produits);
+    /*public function index($userId)
+    {
+        $celliers = Cellier::where('user_id', $userId)->get();
+        return response()->json($celliers);
+    }*/
+
+    public function produits($cellierId)
+    {
+        $cellier = Cellier::with('produits')->findOrFail($cellierId);
+        return response()->json($cellier->produits);
     }
 
     public function index(Request $request) {
-        $user = $request->user(); // utilisateur connecté via Sanctum
-        $celliers = Cellier::with('produits')->where('user_id', $user->id)->get();
-        return response()->json($celliers);
-    }    
+        // Récupère l'utilisateur connecté via le token Bearer
+        $user = $request->user();
 
+        // Sécurité : si token invalide ou absent
+        if (!$user) {
+            return response()->json(['message' => 'Utilisateur non authentifié'], 401);
+        }
+        // Récupère tous les celliers avec les bouteilles
+        $celliers = $user->celliers()->with('produits')->get();
+
+        return response()->json($celliers);
+    }
+
+    public function creerCellier(Request $request)
+    {
+        // Valider les données envoyées par React
+        $validated = $request->validate([
+            'nom' => 'required|string|max:100',
+        ]);
+
+        // Créer le cellier pour l'utilisateur connecté via Sanctum token
+        $cellier = $request->user()->celliers()->create([
+            'nom' => $validated['nom'],
+        ]);
+
+        return response()->json([
+            'message' => 'Cellier créé avec succès.',
+            'cellier' => $cellier
+        ], 201);
+    }
 
 
     public function afficherProduit($cellierId)
     {
         $cellier = Cellier::with('produits')->findOrFail($cellierId);
         return response()->json($cellier);
-    } 
-    
-    public function ajouterProduit(Request $request, $cellierId) {
+    }
+
+
+    public function ajouterProduit(Request $request, $cellierId)
+    {
         $cellier = Cellier::findOrFail($cellierId);
         $produitId = $request->input('produit_id');
         $quantite = $request->input('quantite', 1);
@@ -56,6 +89,7 @@ class CellierController extends Controller
 
         return response()->json(['message' => 'Quantité mise à jour']);
     }
+
 
     public function supprimerProduit(Request $request, $cellierId, $produitId)
     {

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { IoClose } from "react-icons/io5";
+import { Link } from "react-router-dom";
+
 
 export default function AfficheCellier() {
 
@@ -51,11 +53,9 @@ export default function AfficheCellier() {
     };
 
     return (
-      <div className="block p-4">
-        <h1 className="text-2xl font-bold mt-8 mb-8">Mes Celliers 🍇</h1>
-      
-        <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex justify-center p-4">
           <div className="w-full lg:w-1/2">
+          <h1 className="text-2xl font-bold mt-8 mb-8">Mes Celliers 🍇</h1>
 
             {Array.isArray(celliers) && celliers.length > 0 ? (
               <ul className="space-y-4">
@@ -114,15 +114,19 @@ export default function AfficheCellier() {
             ) : (
               <p>Aucun cellier trouvé.</p>
             )}
-
-          </div>
-
-          <div className="w-full lg:w-1/2 p-4 rounded bg-gray-50">
-            <h2 className="text-xl font-bold mb-4">Formulaires et autres...</h2>
-            <p>À venir ...</p>
-          </div>
-
+            <hr className="border border-[1px] border-dotted bouton-vin-rosee mt-10" />
+            <div>
+            <h1 className="text-2xl font-bold mt-8 mb-8">Nouveau cellier 🍇</h1>
+            <Link
+                to="/cellier/creer"
+                className="mt-20 px-6 py-4 bg-[var(--couleur-text)] bg-hover-[var(--couleur-accent)] text-white text-center rounded-lg"
+            >
+            Ajouter un cellier
+            </Link>
         </div>
+
+          </div>
+          
       </div>
     );
 }

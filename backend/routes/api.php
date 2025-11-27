@@ -7,6 +7,7 @@ use App\Http\Controllers\CellierController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Routes des usagers
+Route::post('/inscription', [UserController::class, 'store']);
 
 // Routes des produits (vins)
 
@@ -36,14 +39,12 @@ Route::middleware('auth:sanctum')->post('/deconnexion', [AuthController::class, 
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/celliers', [CellierController::class, 'index']);
+    Route::get('/celliers/{id}', [CellierController::class, 'afficherProduit']);
     Route::post('/celliers/{cellierId}/produits', [CellierController::class, 'ajouterProduit']);
     Route::put('/celliers/{cellierId}/produits/{produitId}', [CellierController::class, 'modifierQuantite']);
     Route::delete('/celliers/{cellierId}/produits/{produitId}', [CellierController::class, 'supprimerProduit']);
+    Route::post('/celliers', [CellierController::class, 'creerCellier']);
 });
-
-//Route::get('/users/{userId}/celliers', [CellierController::class, 'index']);
-
-Route::get('/celliers/{id}', [CellierController::class, 'afficherProduit']);
 
 /* À Hannah */
 Route::get('/identite_produit', [ProduitController::class, 'getCouleurs']);
@@ -51,19 +52,6 @@ Route::get('/produits/couleur/{identite_produit}', [ProduitController::class, 'g
 Route::get('/pays', [ProduitController::class, 'getPays']);
 Route::get('/produits/pays/{pays}', [ProduitController::class, 'getProduitsParPays']);
 /* Plus à Hannah */
-Route::middleware('auth:sanctum')->get('/celliers', [CellierController::class, 'index']);
-
-Route::get('/celliers/{cellierId}/produits', [CellierController::class, 'afficherProduit']);
-Route::post('/celliers/{cellierId}/produits', [CellierController::class, 'ajouterProduit']);
-Route::put('/celliers/{cellierId}/produits/{produitId}', [CellierController::class, 'modifierQuantite']);
-Route::delete('/celliers/{cellierId}/produits/{produitId}', [CellierController::class, 'supprimerProduit']);
-
-Route::get('/celliers/{id}', [CellierController::class, 'afficherProduit']);
-
-/* À Hannah */
-Route::get('/identite_produit', [ProduitController::class, 'getCouleurs']);
-Route::get('/produits/couleur/{identite_produit}', [ProduitController::class, 'getProduitsParCouleur']);
-
 
 // routes/web.php, toujours mettre à la fin pour empêcher de rediriger vers React
 Route::get('/{any}', function () {
