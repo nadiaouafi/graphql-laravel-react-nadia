@@ -21,17 +21,20 @@ const user = JSON.parse(localStorage.getItem("user"));
  
 const bouteillesParPage = 12;
 
+	// Quand un filtre est choisi, on met la page à 1
+	useEffect(() => {
+		setPageCourante(1);
+	}, [filtre]);
+
+
 	useEffect(() => {
 		getproduits(pageCourante, bouteillesParPage, filtre)
 			.then((res) => {
-
-				if (filtre) {
-					setproduits(Array.isArray(res.data) ? res.data : res.data.data || []);
-					setTotalPages(1);
-				} else {
-					setproduits(res.data.data || []);
-					setTotalPages(res.data.last_page || 1);
-				}
+				// API retourne tjrs un objet (quand on load ou change de page) (res.data) 
+				const data = res.data;
+                
+				setproduits(data.data || []); 
+				setTotalPages(data.last_page || 1); 
 			})
 			.catch((err) => console.error("Erreur API :", err));
 	}, [pageCourante, filtre]);
