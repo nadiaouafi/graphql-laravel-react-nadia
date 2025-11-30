@@ -22,7 +22,7 @@ export default function Header() {
       <header className="bg-white py-4 px-6 shadow flex justify-between items-center">
 
         {/* LOGO */}
-        <Link to="/" className="text-2xl font-medium tracking-tight text-red-950">
+        <Link to="/" className="text-3xl font-serif text-red-950">
           Vino
         </Link>
 
@@ -115,7 +115,9 @@ export default function Header() {
       >
         {/* En-tête menu mobile */}
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-serif text-red-950">Vino</h2>
+          <Link to="/" className="text-3xl font-serif text-red-950">
+          Vino
+        </Link>
           <button onClick={() => setMenuOuvert(false)}>
             <X className="w-8 h-8 text-red-950 cursor-pointer" />
           </button>

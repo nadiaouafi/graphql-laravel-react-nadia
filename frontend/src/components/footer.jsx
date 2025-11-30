@@ -46,8 +46,8 @@ export default function Footer() {
           {/* === Connecté === */}
           {token && user && (
             <>
-              <Link to="/celliers" className="hover:text-red-700">Mes celliers</Link>
-              <Link to="/compte" className="hover:text-red-700">Mon compte</Link>
+              <Link to="/celliers" className="hover:text-red-800">Mes celliers</Link>
+              <Link to="/compte" className="hover:text-red-800">Mon compte</Link>
 
               <button
                 className="text-red-950 hover:text-red-700"
@@ -65,8 +65,8 @@ export default function Footer() {
           {/* === Non connecté === */}
           {(!token || !user) && (
             <>
-              <Link to="/inscription" className="hover:text-red-700">Inscription</Link>
-              <Link to="/connexion" className="hover:text-red-700">Connexion</Link>
+              <Link to="/inscription" className="hover:text-red-800">Inscription</Link>
+              <Link to="/connexion" className="hover:text-red-800">Connexion</Link>
             </>
           )}
 

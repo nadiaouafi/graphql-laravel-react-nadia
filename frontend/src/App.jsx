@@ -1,22 +1,26 @@
 import { Routes, Route } from "react-router-dom";
 import Catalogue from "./pages/Catalogue";
 import FicheProduit from "./pages/FicheProduit";
-import CellierUtilisateur from "./components/CellierUtilisateur";
+import CellierUtilisateur from "./components/cellierUtilisateur";
 import Layout from "./components/Layout";
 import Auth from "./pages/Auth";
 import Inscription from "./pages/Inscription";
 import CreerCellier from "./pages/CreerCellier";
-
-
+import MenuMobile from "./components/MenuMobile";
 import CompteUsager from "./components/CompteUsager";
-
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import "./App.css";
 
-export default function App() {
+
+function App() {
   return (
-    <Layout>
-      <Routes>
-        <Route path="/inscription" element={<Inscription />} />
+    <>
+      <Header />
+
+      <main className="pb-24">   {/* important pour ne pas cacher le contenu */}
+        <Routes>
+          <Route path="/inscription" element={<Inscription />} />
         <Route path="/connexion" element={<Auth />} />
         <Route path="/compte" element={<CompteUsager />} />
         <Route path="/" element={<Catalogue />} />         
@@ -29,8 +33,18 @@ export default function App() {
 
         <Route path="/produit/:id" element={<FicheProduit />} />
         <Route path="/celliers" element={<CellierUtilisateur />} />
-
-      </Routes>
-    </Layout>
+        </Routes>
+       
+      </main>
+     <Footer/>
+      <MenuMobile />   {/* ✔ Menu application mobile */}
+    </>
   );
 }
+
+export default App;
+
+
+
+
+
