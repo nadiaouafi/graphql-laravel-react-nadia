@@ -84,33 +84,9 @@ const bouteillesParPage = 12;
 				</div>				
 			))}			
 		</div>
-		{/*totalPages > 1 && (
-			<div className="div-boutons flex justify-center items-center gap-4 mb-8 mt-8">
-				<button
-					onClick={pagePrecedente}
-					disabled={pageCourante === 1}
-					className="px-4 py-2 bouton bouton-vin text-white mt-2 mb-2 rounded text-lg disabled:text:gray"
-				>
-					<span className="boutonRosee">◀</span>
-				</button>					
-				<button className="px-4 py-2 rounded bouton bouton-vin text-white">
-					{pageCourante}
-				</button>					
-				<span className=" text-lg">
-					. . . sur {totalPages}
-				</span>
-				<button
-					onClick={prochainePage}
-					disabled={pageCourante === totalPages}
-					className=" p-2 rounded bouton bouton-vin text-white text-lg mt-2 mb-2 disabled:text-gray"
-				>
-					<span className="boutonRosee text-md">▶</span>
-				</button>
-			</div>
-		)*/
-		
+		{
 		totalPages > 1 && (
-			<div class="navigationCatalogue" className="navigationCatalogue div-boutons flex justify-center items-center mb-8 mt-8">
+			<div className="navigationCatalogue div-boutons flex justify-center items-center mb-8 mt-8">
 				
 				{/* 1. Fleche gauge pas visible à la page 1*/}
 				{pageCourante > 1 && (
