@@ -12,6 +12,7 @@ export default function Filtre({ filtre, setFiltre, ordre, setOrdre }) {
 	const paysDropdownRef = useRef(null);
 	const [pays, setPays] = useState([]);
 	const [openPays, setOpenPays] = useState(false);
+	//const [filtreConteneurOuvert, setFiltreConteneurOuvert] = useState(false);
 
 
 	const lesFiltresOrdre = [
@@ -26,13 +27,6 @@ export default function Filtre({ filtre, setFiltre, ordre, setOrdre }) {
 		"Prix (Croissant)": "prixBasHaut",
 		"Prix (Décroissant)": "prixHautBas"
 	};
-/*
-	useEffect(() => {
-		axiosClient.get("/couleurs")
-			.then(res => setCouleurs(res.data))
-			.catch(err => console.error(err));
-	}, []);
-*/
 
 	useEffect(() => {
 		axiosClient.get("/identite_produit") 
@@ -42,24 +36,9 @@ export default function Filtre({ filtre, setFiltre, ordre, setOrdre }) {
 	useEffect(() => {
 		axiosClient.get("/pays").then(res => setPays(res.data));
 	}, []);
-	/*
-	useEffect(() => {
-		if (!ordre) return;
-
-		const key = ordreMap[ordre];
-
-		setproduits(prev => {
-			const sorted = [...prev];
-			if (key === "anneeJeuneVieux") sorted.sort((a,b) => a.millesime_produit - b.millesime_produit);
-			else if (key === "anneeVieuxJeune") sorted.sort((a,b) => b.millesime_produit - a.millesime_produit);
-			else if (key === "prixBasHaut") sorted.sort((a,b) => a.price - b.price);
-			else if (key === "prixHautBas") sorted.sort((a,b) => b.price - a.price);
-			return sorted;
-		});
-	}, [ordre, setproduits]);
-*/
 
 	// Detection de click hors du dropdown
+	/*
 	useEffect(() => {
 		const handleClickOutside = (e) => {
 			if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -71,88 +50,96 @@ export default function Filtre({ filtre, setFiltre, ordre, setOrdre }) {
 		};
 		document.addEventListener("mousedown", handleClickOutside);
 		return () => document.removeEventListener("mousedown", handleClickOutside);
-	}, []);
+	}, []);*/
+/*
+const getDropdownStyle = (ref) => {
+        if (!ref.current) return {};
+        const rect = ref.current.getBoundingClientRect();
+        return {
+            top: rect.bottom, 
+            left: rect.left,
+            width: rect.width
+        };
+    };*/
 
-	return (
-		<form className="formulaire_de_filtre" style={{ marginBottom: "1rem" }}>
-			<div
-				ref={dropdownRef}
-				className={`custom-select ${open ? "open" : ""}`}
-				onClick={() => setOuvert(!open)}
-			>
-				<div className="selected">{filtre.identite || "Filtrez par identité"}</div>
+return (
+        <form className="formulaire_de_filtre" style={{ marginBottom: "1rem" }}>
+            
+            <div
+                ref={dropdownRef}
+                className={`custom-select ${open ? "open" : ""}`}
+                onClick={() => setOuvert(!open)}
+            >
+                <div className="selected">{filtre.identite || "Filtrez par identité"}</div>
 
-				{open && (
-				<ul className="options">
-					{identites.map(i => (
-					<li 
-						key={i} 
-						className="option" 
-						onClick={(e) => { 
-						e.stopPropagation(); 
-						setFiltre(prev => ({ ...prev, identite: i }));
-						setOuvert(false); 
-						}}
-					>
-						{i}
-					</li>
-					))}
-				</ul>
-				)}
-			</div>
+                {open && (
+                <ul className="options">
+                    {identites.map(i => (
+                    <li 
+                        key={i} 
+                        className="option" 
+                        onClick={(e) => { 
+                        e.stopPropagation(); 
+                        setFiltre(prev => ({ ...prev, identite: i }));
+                        setOuvert(false); 
+                        }}
+                    >
+                        {i}
+                    </li>
+                    ))}
+                </ul>
+                )}
+            </div>
 
-			<div
-				ref={orderDropdownRef}
-				className={`custom-select ${openOrder ? "open" : ""}`}
-				onClick={() => setOuvertOrdre(!openOrder)}
-			>
-				<div className="selected">{ordre || "Trier par"}</div>
-				{openOrder && (
-					<ul className="options">
-						{lesFiltresOrdre.map(o => (
-							<li
-								key={o}
-								className="option"
-								onClick={() => { setOrdre(o); setOuvertOrdre(false); }}
-								
-							>
-								{o}
-							</li>
-						))}
-					</ul>
-				)}
-			</div>
+            <div
+                ref={orderDropdownRef}
+                className={`custom-select ${openOrder ? "open" : ""}`}
+                onClick={() => setOuvertOrdre(!openOrder)}
+            >
+                <div className="selected">{ordre || "Trier par"}</div>
+                {openOrder && (
+                    <ul className="options">
+                        {lesFiltresOrdre.map(o => (
+                            <li
+                                key={o}
+                                className="option"
+                                onClick={() => { setOrdre(o); setOuvertOrdre(false); }}
+                            >
+                                {o}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
 
-			<div
-				ref={paysDropdownRef}
-				className={`custom-select ${openPays ? "open" : ""}`}
-				onClick={() => setOpenPays(!openPays)}
-			>
-				<div className="selected">
-					{filtre.pays || "Filtrer par pays"}
-				</div>
+            <div
+                ref={paysDropdownRef}
+                className={`custom-select ${openPays ? "open" : ""}`}
+                onClick={() => setOpenPays(!openPays)}
+            >
+                <div className="selected">
+                    {filtre.pays || "Filtrer par pays"}
+                </div>
 
+                {openPays && (
+                    <ul className="options">
+                        {pays.map(p => (
+                            <li
+                                key={p}
+                                className="option"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setFiltre(prev => ({ ...prev, pays: p }));
+                                    setOpenPays(false);
+                                }}
+                            >
+                                {p}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
 
-
-				{openPays && (
-					<ul className="options">
-						{pays.map(p => (
-							<li
-								key={p}
-								className="option"
-								onClick={(e) => {
-									e.stopPropagation();
-									setFiltre(prev => ({ ...prev, pays: p }));
-									setOpenPays(false);
-								}}
-							>
-								{p}
-							</li>
-						))}
-					</ul>
-				)}
-			</div>
-
-		</form>
-	);
+        </form>
+    );
 }

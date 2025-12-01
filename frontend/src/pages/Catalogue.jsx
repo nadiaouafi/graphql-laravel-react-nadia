@@ -110,7 +110,7 @@ const bouteillesParPage = 12;
 		)*/
 		
 		totalPages > 1 && (
-			<div class="navigationCatalogue" className="navigationCatalogue div-boutons flex justify-center items-center mb-8 mt-8">
+			<div className="navigationCatalogue div-boutons flex justify-center items-center mb-8 mt-8">
 				
 				{/* 1. Fleche gauge pas visible à la page 1*/}
 				{pageCourante > 1 && (
