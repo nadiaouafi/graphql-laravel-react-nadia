@@ -1,9 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import axiosClient from "../api/axios";
 
-//export default function Filtre({ filtre, setFiltre, ordre, setOrdre, setproduits }) {
 export default function Filtre({ filtre, setFiltre, ordre, setOrdre }) {
-/*const [couleurs, setCouleurs] = useState([]);*/
 	const [identites, setIdentites] = useState([]);
 	const [open, setOuvert] = useState(false);
 	const [openOrder, setOuvertOrdre] = useState(false);
@@ -12,8 +10,6 @@ export default function Filtre({ filtre, setFiltre, ordre, setOrdre }) {
 	const paysDropdownRef = useRef(null);
 	const [pays, setPays] = useState([]);
 	const [openPays, setOpenPays] = useState(false);
-	//const [filtreConteneurOuvert, setFiltreConteneurOuvert] = useState(false);
-
 
 	const lesFiltresOrdre = [
 		"Millésime (Croissant)",
@@ -21,12 +17,6 @@ export default function Filtre({ filtre, setFiltre, ordre, setOrdre }) {
 		"Prix (Croissant)",
 		"Prix (Décroissant)"
 	];
-	const ordreMap = {
-		"Millésime (Croissant)": "anneeJeuneVieux",
-		"Millésime (Décroissant)": "anneeVieuxJeune",
-		"Prix (Croissant)": "prixBasHaut",
-		"Prix (Décroissant)": "prixHautBas"
-	};
 
 	useEffect(() => {
 		axiosClient.get("/identite_produit") 
@@ -37,32 +27,7 @@ export default function Filtre({ filtre, setFiltre, ordre, setOrdre }) {
 		axiosClient.get("/pays").then(res => setPays(res.data));
 	}, []);
 
-	// Detection de click hors du dropdown
-	/*
-	useEffect(() => {
-		const handleClickOutside = (e) => {
-			if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-				setOuvert(false);
-			}
-			else if (orderDropdownRef.current && !orderDropdownRef.current.contains(e.target)) {
-				setOuvertOrdre(false);
-			}
-		};
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => document.removeEventListener("mousedown", handleClickOutside);
-	}, []);*/
-/*
-const getDropdownStyle = (ref) => {
-        if (!ref.current) return {};
-        const rect = ref.current.getBoundingClientRect();
-        return {
-            top: rect.bottom, 
-            left: rect.left,
-            width: rect.width
-        };
-    };*/
-
-return (
+	return (
         <form className="formulaire_de_filtre" style={{ marginBottom: "1rem" }}>
             
             <div
