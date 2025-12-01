@@ -38,7 +38,12 @@ export default function CompteUsager() {
     e.preventDefault();
 
     try {
+<<<<<<< Updated upstream
       const res = await api.put("/user",
+=======
+      const res = await api.put(
+        "/user",
+>>>>>>> Stashed changes
         {
           name: nom,
           current_password: mdpActuel,
