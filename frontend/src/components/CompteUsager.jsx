@@ -19,7 +19,7 @@ export default function CompteUsager() {
 
   // afficher info de l'usager
   useEffect(() => {
-    api.get("http://localhost:8000/api/user", {
+    api.get("/user", {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     })
     .then(res => {
@@ -38,8 +38,7 @@ export default function CompteUsager() {
     e.preventDefault();
 
     try {
-      const res = await api.put(
-        "http://localhost:8000/api/user",
+      const res = await api.put("/user",
         {
           name: nom,
           current_password: mdpActuel,
@@ -77,7 +76,7 @@ export default function CompteUsager() {
   const supprimerCompte = async () => {
     
     try {
-      const res = await api.delete("http://localhost:8000/api/user", {
+      const res = await api.delete("/user", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       });
 
