@@ -8,13 +8,16 @@ import {
   ChevronUp,
 } from "lucide-react";
 import BoutonDeconnexion from './BoutonDeconnexion';
+import GetUsager from "./GetUsager";
+import GetToken from "./GetToken";
 
 export default function Header({deconnexion}) {
   const [menuOuvert, setMenuOuvert] = useState(false);
   const [compteOuvert, setCompteOuvert] = useState(false);
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  const token = localStorage.getItem("token");
+  // Récupérer token et user depuis localStorage ou sessionStorage
+  const token = GetToken();
+  const user = GetUsager();
 
   return (
     <>
@@ -39,14 +42,14 @@ export default function Header({deconnexion}) {
         {/* ===== NAVIGATION DESKTOP ===== */}
         <nav className="hidden md:flex items-center gap-8 text-lg font-medium">
 
-         {token && (
-  <Link to="/" className="hover:text-red-950 transition">
-    Catalogue
-  </Link>
-)}
+        {token && (
+        <Link to="/catalogue" className="hover:text-red-950 transition">
+          Catalogue
+        </Link>
+        )}
 
-          {/* ===== SI CONNECTÉ ===== */}
-          {token && user && (
+        {/* ===== SI CONNECTÉ ===== */}
+        {token && user && (
             <>
               {/* Sous-menu Mon compte */}
               <div className="relative">
@@ -143,10 +146,10 @@ export default function Header({deconnexion}) {
         <nav className="flex flex-col gap-4 text-lg font-medium">
 
           {token && (
-  <Link to="/" className="hover:text-red-950 transition">
-    Catalogue
-  </Link>
-)}
+          <Link to="/catalogue" className="hover:text-red-950 transition">
+            Catalogue
+          </Link>
+          )}
 
           {/* SI CONNECTÉ */}
           {token && user && (

@@ -1,9 +1,13 @@
 import { Github } from "lucide-react";
 import { Link } from "react-router-dom";
+import GetUsager from "./GetUsager";
+import GetToken from "./GetToken";
 
 export default function Footer() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const token = localStorage.getItem("token");
+  
+  // Récupérer token et user depuis localStorage ou sessionStorage
+  const token = GetToken
+  const user = GetUsager();
 
   return (
     <footer className="mt-20 bg-stone-200 text-red-950">
