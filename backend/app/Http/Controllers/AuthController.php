@@ -23,8 +23,8 @@ class AuthController extends Controller
         ],
 [],
         [
-            'email' => 'courriel',
-            'password' => 'mot de passe'
+            'email' => 'email',
+            'password' => 'password'
         ]);
 
         $usager = User::where('email', $request->email)->first(); 
@@ -33,6 +33,7 @@ class AuthController extends Controller
         }
         // Création du token Sanctum pour connecter avec React
         $token = $usager->createToken('auth_token')->plainTextToken;
+        //$token = $usager->createToken('token')->accessToken;
         
         return response()->json([
             'message' => 'Vous êtes maintenant connecté!',

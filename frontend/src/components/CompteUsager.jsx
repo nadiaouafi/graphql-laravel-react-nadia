@@ -27,9 +27,12 @@ export default function CompteUsager() {
     .catch(error => {
       setErreurs(error.response?.data?.message || "Erreur lors du chargement du profil");
     });
-  }, []);
+  });
 
-  if (!usager) return <div>Chargement...</div>;
+  if (!usager) return 
+  <div className="points">
+    <span></span><span></span><span></span>
+  </div>
 
   // Mettre à jour le profil
   const modifierInfos = async (e) => {
@@ -89,9 +92,9 @@ export default function CompteUsager() {
       setErreurs(error.response?.data?.message || "Erreur lors de la suppression");
     }
   };
-
+  
   return (
-    <section className="p-3 py-4">
+    <section className="p-4">
       <div className="contenu">
         {msg && <p className="text-lime-700 mb-3">{msg}</p>}
         <h1 className="text-2xl font-bold">Mon profil</h1>

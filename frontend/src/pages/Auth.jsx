@@ -58,9 +58,7 @@ export default function Auth() {
       } else {
         localStorage.removeItem('souvenir_courriel');
       }
-      // Mettre par défaut dans le header, le token
-      api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-
+      
       // Vider les champs après soumission
       setCourriel('')
       setMotDePasse('')
@@ -79,8 +77,7 @@ export default function Auth() {
         setErreurs({general: error.response.data.message});
       }
     }
-  };
-  
+  };  
   return (
     <section className="mt-30">
       {msgSucces &&(

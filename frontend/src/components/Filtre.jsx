@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import axiosClient from "../api/axios";
+import api from "../api/axios";
 
 export default function Filtre({ filtre, setFiltre, ordre, setOrdre }) {
 	const [identites, setIdentites] = useState([]);
@@ -19,14 +19,16 @@ export default function Filtre({ filtre, setFiltre, ordre, setOrdre }) {
 	];
 
 	useEffect(() => {
-		axiosClient.get("/identite_produit") 
+		api.get("/identite_produit") 
 			.then(res => setIdentites(res.data))
 			.catch(err => console.error(err));
 	}, []);
 	useEffect(() => {
-		axiosClient.get("/pays").then(res => setPays(res.data));
+		api.get("/pays_origine").then(res => setPays(res.data));
 	}, []);
-
+    if (!lesFiltresOrdre) return <div className="points">
+        <span></span><span></span><span></span>
+    </div>;
 	return (
         <form className="formulaire_de_filtre" style={{ marginBottom: "1rem" }}>
             

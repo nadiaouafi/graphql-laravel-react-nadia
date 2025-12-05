@@ -42,11 +42,11 @@ export default function Header({deconnexion}) {
         {/* ===== NAVIGATION DESKTOP ===== */}
         <nav className="hidden md:flex items-center gap-8 text-lg font-medium">
 
-        {token && (
-        <Link to="/catalogue" className="hover:text-red-950 transition">
-          Catalogue
-        </Link>
-        )}
+         {token && (
+            <Link to="/produits" className="hover:text-red-950 transition">
+              Catalogue
+            </Link>
+          )}
 
         {/* ===== SI CONNECTÉ ===== */}
         {token && user && (
