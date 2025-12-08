@@ -11,10 +11,11 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AjouterProduitCellier from './pages/AjouterProduitCellier'; 
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import api from "./api/axios"
 
 function App() {
+  const [recherche, setRecherche] = useState('');
   useEffect(() => {
     // Configurer le header au démarrage si token existe
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
@@ -25,7 +26,7 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header recherche={recherche} setRecherche={setRecherche} />
       <main className="pb-24 flex-1 px-4">
         {" "}
         {/* important pour ne pas cacher le contenu */}
