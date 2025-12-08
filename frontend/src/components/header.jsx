@@ -93,7 +93,7 @@ export default function Header({ deconnexion, recherche, setRecherche }) {
               </Link>
 
               <Link
-                to="/connexion"
+                to="/"
                 className="bg-red-950 text-white px-4 py-2 rounded-lg hover:bg-red-200 hover:text-red-950 transition"
               >
                 Connexion
@@ -190,7 +190,7 @@ export default function Header({ deconnexion, recherche, setRecherche }) {
               </Link>
 
               <Link
-                to="/connexion"
+                to="/"
                 className="mt-4 bg-red-950 text-white text-center py-3 rounded-lg hover:bg-red-100 hover:text-red-950 transition"
                 onClick={() => setMenuOuvert(false)}
               >
