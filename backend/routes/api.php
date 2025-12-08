@@ -39,6 +39,7 @@ Route::get('/produits/{id}', [ProduitController::class, 'show']);
 Route::post('/connexion', [AuthController::class, 'store']);
 Route::middleware('auth:sanctum')->post('/deconnexion', [AuthController::class, 'destroy']);
 
+// Routes des celliers
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/celliers', [CellierController::class, 'index']);
     Route::get('/celliers/{id}', [CellierController::class, 'afficherProduit']);
@@ -48,12 +49,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/celliers', [CellierController::class, 'creerCellier']);
 });
 
-/* À Hannah */
+// Routes des filtres
 Route::get('/identite_produit', [ProduitController::class, 'getCouleurs']);
 Route::get('/pays_origine', [ProduitController::class, 'getPays']);
-/* Plus à Hannah */
 
+// Routes  mot de passe oublié
+Route::post('/mdp-oublie', [UserController::class, 'email']);
+Route::post('/mdp-reinitialise', [UserController::class, 'resetUpdate']);
 
+// Route test 
 Route::get('/test', function() {
     return response()->json(['message' => 'Backend fonctionne !']);
 });
