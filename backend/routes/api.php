@@ -46,6 +46,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/celliers/{cellierId}/produits/{produitId}', [CellierController::class, 'modifierQuantite']);
     Route::delete('/celliers/{cellierId}/produits/{produitId}', [CellierController::class, 'supprimerProduit']);
     Route::post('/celliers', [CellierController::class, 'creerCellier']);
+    Route::put('/celliers/{id}', [CellierController::class, 'modifieNomCellier']);
 });
 
 /* À Hannah */
