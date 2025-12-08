@@ -17,10 +17,12 @@ import ReinitialiserMotDePasse from "./pages/ReinitialiserMotDePasse";
 
 // Faire afficher les vues de react
 function App() {
+
+  const [recherche, setRecherche] = useState(""); 
   
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header recherche={recherche} setRecherche={setRecherche} />
       <main className="pb-24 flex-1 px-4">
         {" "}
         {/* important pour ne pas cacher le contenu */}
@@ -36,8 +38,7 @@ function App() {
 
           <Route path="/user/:id/celliers" element={<CellierUtilisateur />} />
           <Route path="/cellier/creer" element={<CreerCellier />} />          
-          <Route path="/user/:userId/celliers/produits/:produitId" element={<AjouterProduitCellier />} 
-    />
+          <Route path="/user/:userId/celliers/produits/:produitId" element={<AjouterProduitCellier />} />
           <Route path="/celliers" element={<CellierUtilisateur />} />
         </Routes>       
       </main>

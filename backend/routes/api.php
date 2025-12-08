@@ -47,6 +47,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/celliers/{cellierId}/produits/{produitId}', [CellierController::class, 'modifierQuantite']);
     Route::delete('/celliers/{cellierId}/produits/{produitId}', [CellierController::class, 'supprimerProduit']);
     Route::post('/celliers', [CellierController::class, 'creerCellier']);
+    Route::put('/celliers/{id}', [CellierController::class, 'modifieNomCellier']);
 });
 
 // Routes des filtres
@@ -56,6 +57,10 @@ Route::get('/pays_origine', [ProduitController::class, 'getPays']);
 // Routes  mot de passe oublié
 Route::post('/mdp-oublie', [UserController::class, 'email']);
 Route::post('/mdp-reinitialise', [UserController::class, 'resetUpdate']);
+
+Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '.*');
 
 // Route test 
 Route::get('/test', function() {

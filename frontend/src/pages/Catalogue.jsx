@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getproduits } from "../api/produits";
 import { Link } from "react-router-dom";
 import Filtre from "../components/Filtre";
+import GetUsager from "../components/GetUsager";
 
 /**
  * @param
@@ -16,7 +17,7 @@ const Catalogue = () => {
 	const [ordre, setOrdre] = useState("");
 
 	// Obtenir les infos de l'usager 
-	const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
+	const user = GetUsager();
 
 	const bouteillesParPage = 12;
 
@@ -24,9 +25,9 @@ const Catalogue = () => {
 		setPageCourante(1);
 	}, [filtre, ordre]);
 
-	if (!user) {
+	/*if (!user) {
 	return <p>Veuillez vous connecter pour voir le catalogue.</p>
-	}
+	}*/
 	useEffect(() => {
 		getproduits(pageCourante, bouteillesParPage, filtre, ordre)
 			.then((res) => {
@@ -55,7 +56,7 @@ const Catalogue = () => {
 	</div>;
   	return (
 		<div className="contenu"> 
-			<p className="flex justify-end mb-15 text-sm">{user && user.name ? `Bienvenue ${user.name} !` : ""}</p>
+			<p className="flex justify-end mb-15 text-sm">{user ? `Bienvenue ${user.name} !` : ""}</p>
 			<h1 className="mt-10 mb-6 text-4xl text-bold text-center">Catalogue</h1>
 			<Filtre filtre={filtre} setFiltre={setFiltre} ordre={ordre} setOrdre={setOrdre} setproduits={setproduits}/>		
 			<div className="grilleBouteille">
@@ -98,7 +99,7 @@ const Catalogue = () => {
 					{/* 2. Page 1 pas visible à la page 1 ou 2 */}
 					{pageCourante !== 1 && (
 						<button
-							onClick={() => goToPage(1)}
+							onClick={() => allALaPage(1)}
 							className="allALaPage"
 						>
 							1
@@ -134,7 +135,7 @@ const Catalogue = () => {
 					)}
 					{pageCourante !== totalPages && (
 						<button
-							onClick={() => goToPage(totalPages)}
+							onClick={() => allALaPage(totalPages)}
 							className="allALaPage"
 						>
 							{totalPages}
