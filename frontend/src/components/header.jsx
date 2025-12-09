@@ -128,13 +128,8 @@ export default function Header({ deconnexion, recherche, setRecherche }) {
 
         {/* Recherche mobile */}
         {token && (
-        <div className="bg-white rounded-full px-4 py-2 flex items-center mb-8 border">
-          <Search className="text-red-950 w-5 h-5" />
-          <input
-            type="text"
-            placeholder="Rechercher..."
-            className="ml-2 w-full bg-transparent focus:outline-none text-red-950"
-          />
+        <div className="flex md:hidden items-center w-full mt-4 md:mt-0">
+            <Recherche recherche={recherche} setRecherche={setRecherche} />
         </div>
         )}
 
