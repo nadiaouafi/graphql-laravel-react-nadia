@@ -32,15 +32,17 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 Route::post('/inscription', [UserController::class, 'store']);
 
-// Routes des produits (vins)
-Route::get('/produits', [ProduitController::class, 'index']);
-Route::get('/produits/{id}', [ProduitController::class, 'show']);
-
 // Routes d'authentification
 Route::post('/connexion', [AuthController::class, 'store']);
 Route::middleware('auth:sanctum')->post('/deconnexion', [AuthController::class, 'destroy']);
 
 Route::middleware('auth:sanctum')->group(function () {
+
+    // Routes des produits (vins)
+    Route::get('/produits', [ProduitController::class, 'index']);
+    Route::get('/produits/{id}', [ProduitController::class, 'show']);
+
+    // Routes pour les celliers
     Route::get('/celliers', [CellierController::class, 'index']);
     Route::get('/celliers/{id}', [CellierController::class, 'afficherProduit']);
     Route::post('/celliers/{cellierId}/produits', [CellierController::class, 'ajouterProduit']);
@@ -49,7 +51,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/celliers', [CellierController::class, 'creerCellier']);
 
     // Routes pour la liste d'achat
-
     Route::get('/liste-achats', [ListeAchatController::class, 'index']);
     Route::post('/liste-achats/{produit}', [ListeAchatController::class, 'store']);
     Route::put('/liste-achats/{id}', [ListeAchatController::class, 'update']);
@@ -62,6 +63,6 @@ Route::get('/pays_origine', [ProduitController::class, 'getPays']);
 /* Plus à Hannah */
 
 
-Route::get('/test', function() {
+Route::get('/test', function () {
     return response()->json(['message' => 'Backend fonctionne !']);
 });
