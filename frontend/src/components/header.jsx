@@ -23,9 +23,10 @@ export default function Header({deconnexion, recherche, setRecherche }) {
 
         {/* BARRE DE RECHERCHE */}
         {token && (
-          <div className="hidden md:flex items-center w-1/4">
-            <Recherche recherche={recherche} setRecherche={setRecherche} />
-          </div>
+        <div className="hidden md:flex items-center w-1/4">
+          <Recherche recherche={recherche} setRecherche={setRecherche} />
+        </div>
+
         )}
 
         {/* ===== NAVIGATION ===== */}

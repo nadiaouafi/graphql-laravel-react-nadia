@@ -35,6 +35,8 @@ class AuthController extends Controller
         }
         // Création du token Sanctum pour connecter avec React
         $token = $usager->createToken('auth_token')->plainTextToken;
+
+
         return response()->json([
             'message' => 'Vous êtes maintenant connecté!',
             'user' => [

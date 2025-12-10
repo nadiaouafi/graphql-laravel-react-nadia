@@ -1,6 +1,7 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "./api/axios";
+// Pages
 import Catalogue from "./pages/Catalogue";
 import FicheProduit from "./pages/FicheProduit";
 import Auth from "./pages/Auth";
@@ -24,7 +25,6 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-
       {/* HEADER */}
       <Header recherche={recherche} setRecherche={setRecherche} />
 
