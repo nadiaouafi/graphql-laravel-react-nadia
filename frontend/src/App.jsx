@@ -1,5 +1,6 @@
 import { Routes, Route} from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import "./App.css";
 
 // Pages
 import Catalogue from "./pages/Catalogue";
@@ -9,6 +10,8 @@ import Inscription from "./pages/Inscription";
 import AjouterProduitCellier from "./pages/AjouterProduitCellier";
 import CreerCellier from "./pages/CreerCellier";
 import ListeAchats from "./pages/ListeAchats";
+import ReinitialiserMotDePasse from "./pages/ReinitialiserMotDePasse";
+import MotDePasseOublie from "./pages/MotDePasseOublie";
 
 // Composants
 import Header from "./components/header";
@@ -16,9 +19,6 @@ import Footer from "./components/Footer";
 import MenuMobile from "./components/MenuMobile";
 import CompteUsager from "./components/CompteUsager";
 import CellierUtilisateur from "./components/CellierUtilisateur";
-import MotDePasseOublie from "./pages/MotDePasseOublie";
-
-import "./App.css";
 
 function App() {
 
@@ -35,6 +35,8 @@ function App() {
 
           {/* Auth */}
           <Route path="/" element={<Auth />} />
+          <Route path="/mdp-oublie" element={<MotDePasseOublie />} />
+          <Route path="/mdp-reinitialise" element={<ReinitialiserMotDePasse />} />
           <Route path="/inscription" element={<Inscription />} />
 
           {/* Compte */}
@@ -44,19 +46,14 @@ function App() {
           <Route path="/produits" element={<Catalogue />} />
           <Route path="/produits/:id" element={<FicheProduit />} />
 
-          {/* Liste d’achats */}
-          <Route path="/liste-achats" element={<ListeAchats />} />
-
           {/* Celliers */}
           <Route path="/celliers" element={<CellierUtilisateur />} />
           <Route path="/user/:id/celliers" element={<CellierUtilisateur />} />
           <Route path="/cellier/creer" element={<CreerCellier />} />
-          <Route
-            path="/user/:userId/celliers/produits/:produitId"
-            element={<AjouterProduitCellier />}
-          />
-          {/* Mot de passe oublié*/}
-          <Route path="/mdp-oublie" element={<MotDePasseOublie />} />
+          <Route path="/user/:userId/celliers/produits/:produitId" element={<AjouterProduitCellier />} />
+
+          {/* Liste d’achats */}
+          <Route path="/liste-achats" element={<ListeAchats />} />
 
         </Routes>
       </main>
