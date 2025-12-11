@@ -100,6 +100,13 @@ export default function Header({deconnexion, recherche, setRecherche }) {
           </button>
         </div>
 
+        {/* Recherche mobile */}
+        {token && (
+        <div className="flex md:hidden items-center w-full mt-4 md:mt-0">
+            <Recherche recherche={recherche} setRecherche={setRecherche} />
+        </div>
+        )}
+
         {/* NAV mobile */}
         <nav className="flex flex-col gap-4 text-lg font-medium">
           {token && <Link to="/produits">Catalogue</Link>}
