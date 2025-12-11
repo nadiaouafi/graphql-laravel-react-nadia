@@ -145,3 +145,7 @@ Aucun autre fichier ne devrait avoir ces variables :root suivantes.
     top: 8px;
     left: 4px;
 }
+
+.recherche_catalogue {
+    background-color: white;
+}
