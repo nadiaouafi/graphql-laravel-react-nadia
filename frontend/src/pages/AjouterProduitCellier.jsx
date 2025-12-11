@@ -29,10 +29,6 @@ import { useNavigate } from "react-router-dom";
             .then(res => {
                 const listeCelliers = Array.isArray(res.data) ? res.data : [];
                 setCelliers(listeCelliers);
-
-                if (listeCelliers.length > 0) {
-                    setCellierSelectionne(listeCelliers[0].id);
-                }
             })
             .catch(err => console.error("Erreur celliers:", err));
     }, []);
@@ -43,16 +39,34 @@ import { useNavigate } from "react-router-dom";
         api.get(`/produits/${produitId}`)
             .then(res => setProduit(res.data))
             .catch(err => console.error("Erreur produit:", err));
-    }, [produitId]);
-    
-    
+    }, [produitId]);    
    
     /**
      * Fonction qui ajoute un vin dans un cellier à partir d'un formulaire d'ajout. Possibilité d'incrémenter ou décrémenter la quantité avant de soumettre.
+     * @param param0
      * @returns retourne le vin ajouté au cellier
      */
     const ajouterProduit = () => {
-        if (!produit || !cellierSelectionne) return;
+        // Vérifier la quantité
+        if (!quantite || quantite < 1) {
+            setMessageErreur("Vous devez ajouter au moins 1 bouteille.");
+            setModalErreurVisible(true);
+            return;
+        }
+
+        // Vérifier si un cellier est sélectionné
+        if (!cellierSelectionne) {
+            setMessageErreur("Veuillez sélectionner un cellier avant d'ajouter un produit.");
+            setModalErreurVisible(true);
+            return;
+        }
+
+        // Vérifier que le produit existe
+        if (!produit) {
+            setMessageErreur("Aucun produit sélectionné.");
+            setModalErreurVisible(true);
+            return;
+        }
 
         api.post(`/celliers/${cellierSelectionne}/produits`, {
             produit_id: produit.id,
@@ -64,18 +78,18 @@ import { useNavigate } from "react-router-dom";
             setModalAjouterVisible(true);
             setQuantite(1);
 
-            // fermer la modale après 5s et rediriger vers le cellier
+            // fermer la modale après 5s et rediriger vers la liste des celliers
             setTimeout(() => {
                 setModalAjouterVisible(false);
                 navigate(`/celliers`);
             }, 5000);
-
         })
         .catch(err => {
             setMessageErreur("Erreur lors de l'ajout du produit.");
             setModalErreurVisible(true);
         });
     };
+
     {/* Animations 3 points pour le chargement de la page */}
     if (!produit) return <div className="points"> 
         <span></span><span></span><span></span>

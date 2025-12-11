@@ -8,14 +8,7 @@ use App\Models\Cellier;
 
 class CellierController extends Controller
 {
-    /*public function index($userId)
-    {
-        $celliers = Cellier::where('user_id', $userId)->get();
-        return response()->json($celliers);
-    }*/
-
-    public function produits($cellierId)
-    {
+    public function produits($cellierId) {
         $cellier = Cellier::with('produits')->findOrFail($cellierId);
         return response()->json($cellier->produits);
     }
@@ -60,11 +53,20 @@ class CellierController extends Controller
     }
 
 
-    public function ajouterProduit(Request $request, $cellierId)
-    {
+    public function ajouterProduit(Request $request, $cellierId) {
+        // Vérifie qu'un cellier est sélectionné
+        if (!$cellierId) {
+            return response()->json(['message' => 'Aucun cellier sélectionné'], 400);
+        }
+
         $cellier = Cellier::findOrFail($cellierId);
+
         $produitId = $request->input('produit_id');
         $quantite = $request->input('quantite', 1);
+
+        if (!$cellier) {
+            return response()->json(['message' => 'Cellier introuvable'], 404);
+        }
 
         $item = $cellier->produits()->where('produit_id', $produitId)->first();
 
@@ -76,7 +78,9 @@ class CellierController extends Controller
             $cellier->produits()->attach($produitId, ['quantite' => $quantite]);
         }
 
-        return response()->json($cellier->produits()->where('produit_id', $produitId)->first());
+        return response()->json(
+            $cellier->produits()->where('produit_id', $produitId)->first()
+        );
     }
 
 
