@@ -8,7 +8,7 @@ Notre projet consiste à développer une application SPA (Single Page Applicatio
 
 ## Description du projet
 
-Notre appication permet aux utilisateurs de créer et gérer plusieurs celliers, d’y ajouter des bouteilles, de suivre les quantités, et d’effectuer des actions comme le déplacement ou le retrait de bouteilles.
+Notre application permet aux utilisateurs de créer et gérer plusieurs celliers, d’y ajouter des bouteilles, de suivre les quantités, et d’effectuer des actions comme le déplacement ou le retrait de bouteilles.
 
 Le projet repose sur une architecture découplée :
 
@@ -39,10 +39,32 @@ Ce projet vise à :
 
 - Gérer un projet full‑stack moderne
 
+## Technologies utilisées
+
+Données externes (GraphQL & automatisation)
+
+- Récupération automatisée de plus de 8 000 bouteilles de vin d'un catalogue provenant d’un fournisseur externe
+
+- Utilisation de GraphQL pour interroger l’API exposée par le fournisseur de données
+
+- Extraction des informations suivantes :
+
+    - Nom du produit
+    - Millésime
+    - Type de vin
+    - Pays d'origine
+    - Prix
+    - etc.
+
+- Mise en place d’un cron job Laravel pour :
+
+    - lancer la première fois la récupération des données et les enregistrer dans la base de données de l'application
+    
+    - éviter les doublons et maintenir la cohérence des données
+
 ## Architecture technique
 /backend        → Laravel (API REST)
 /public_html    → React (build de production)
-Backend (Laravel)
 
 - Framework : Laravel
 
@@ -76,7 +98,8 @@ Backend (Laravel)
 
 - Réponses JSON normalisées
 
-## Installation (en local)
+## Installation et déploiement en développement (local) 
+
 *Fork le projet principal*
 https://github.com/Equipe-MCHNC/graphql-laravel-react
 
@@ -95,7 +118,7 @@ Node.js & npm
 
 Base de données MySQL
 
-### Backend
+### Backend terminal local
 - cd backend
 - composer install
 - cp .env.example .env
@@ -103,18 +126,36 @@ Base de données MySQL
 - php artisan migrate
 - php artisan serve
 
-### Frontend
+### Frontend terminal local
 - cd frontend
 - npm install
 - npm run dev
 
-### Déploiement
+## Déploiement en production (Planet Hoster)
 
-- Le backend Laravel est déployé à la racine du serveur
+- Le projet est déployé sur un hébergement PlanetHoster avec une architecture découplée.
 
-- Le frontend React est compilé et déployé dans le dossier public_html
+/home
+├── backend → Application Laravel (API)
+└── public_html → Frontend React (build de production)
 
-- Les appels API utilisent des URLs absolues vers le backend
+## Backend (Laravel)
+
+- Déployé dans le dossier backend
+
+- Configuration du fichier .env adaptée à l’environnement de production
+
+- Base de données configurée sur le serveur
+
+- Routes exposées uniquement via routes/api.php
+
+## Frontend (React)
+
+- Application compilée avec npm run build
+
+- Fichiers générés copiés dans public_html
+
+- Communication avec le backend via des URLs absolues
 
 ## Objectifs pédagogiques
 
@@ -135,6 +176,14 @@ Base de données MySQL
 - Statistiques sur les utilisateurs et leurs celliers
 
 - Tests automatisés (unitaires et fonctionnels)
+
+- Mise en place d’un cron job Laravel pour :
+
+    - lancer périodiquement la récupération des données de la SAQ
+
+    - mettre à jour les informations en base de données    
+
+- Enregistrement des données normalisées dans la base de données de l’application
 
 - Accessibilité (a11y)
 
