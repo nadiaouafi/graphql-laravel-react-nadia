@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/api",
-  //baseURL: "https://1640340.webdevmaisonneuve.ca",
+  //baseURL: "http://localhost:8000/api",
+  baseURL: "https://e2396692.webdevmaisonneuve.ca/backend/public/api",
   headers: { "X-Requested-With": "XMLHttpRequest" },
   withCredentials: true, // très important !
 });
